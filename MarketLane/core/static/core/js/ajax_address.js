@@ -1,4 +1,4 @@
-$('button.btn-edit').click(function () {
+$('a.btn-edit').click(function () {
     // id = $(this).attr('data-id');
     // console.log(id)
     // $.ajax({

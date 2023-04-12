@@ -1,16 +1,16 @@
 <script>
-    // product view page 
+    // product view page
     $('#prod-view-cart').click(function(){
         console.log('button clicked');
-        prod_id = $('input[name="prod_id"]').val();
-        console.log(prod_id);
-        data = {'prod_id':prod_id};
-        $.ajax({
-            url:"{% url 'add_product_cart' %}",
-            method:'GET',
-            data:data,
-            success:function(response){
-                console.log('product added to cart');
+    prod_id = $('input[name="prod_id"]').val();
+    console.log(prod_id);
+    data = {'prod_id':prod_id};
+    $.ajax({
+        url:"{% url 'add_product_cart' %}",
+    method:'GET',
+    data:data,
+    success:function(response){
+        console.log('product added to cart');
             }
         })
     })
@@ -19,16 +19,16 @@
     $('button.cart-btn').click(function(){
         console.log('button clicked')
         prod_id = $(this).attr('data-id');
-        console.log(prod_id)
-        data = {
-            'prod_id':prod_id
+    console.log(prod_id)
+    data = {
+        'prod_id':prod_id
         }
-        $.ajax({
-            url:"{% url 'add_product_cart' %}",
-            method:'GET',
-            data:data,
-            success:function(response){
-                console.log('product added to cart');
+    $.ajax({
+        url:"{% url 'add_product_cart' %}",
+    method:'GET',
+    data:data,
+    success:function(response){
+        console.log('product added to cart');
             }
         })
     })
@@ -37,16 +37,16 @@
     $('button.product-button').click(function(){
         console.log('clicked')
         prod_id = $(this).attr('data-id');
-        console.log(prod_id)
-        data = {
-            'prod_id':prod_id
+    console.log(prod_id)
+    data = {
+        'prod_id':prod_id
         }
-        $.ajax({
-            url:"{% url 'add_product_cart' %}",
-            method:'GET',
-            data:data,
-            success:function(response){
-                console.log('product added to cart');
+    $.ajax({
+        url:"{% url 'add_product_cart' %}",
+    method:'GET',
+    data:data,
+    success:function(response){
+        console.log('product added to cart');
             }
         })
     })
@@ -54,17 +54,24 @@
     // men and women page product adding to cart 
     $('button.product-card-btn').click(function(){
         console.log('clicked');
-        prod_id = $(this).attr('data-id');
-        console.log(prod_id);
-        data = {
-            'prod_id':prod_id
+    prod_id = $(this).attr('data-id');
+    console.log(prod_id);
+    data = {
+        'prod_id':prod_id
         }
-        $.ajax({
-            url:"{% url 'add_product_cart' %}",
-            method:'GET',
-            data:data,
-            success:function(response){
-                console.log('product added to cart');
+    $.ajax({
+        url:"{% url 'add_product_cart' %}",
+    method:'GET',
+    data:data,
+    success:function(response){
+        console.log(response);
+                // let add_cart_btn = $(`button[data-id=${prod_id}]`);
+                // add_cart_btn.addClass('d-none');
+
+                // let show_cart = $(`a[data-id=${prod_id}]`);
+                // show_cart.removeClass('d-none');
+                // show_cart.addClass('d-block');
+                // console.log(v)
             }
         })
     })
@@ -72,17 +79,17 @@
     // this is catergory view gender and ladies products. These products are retreive by ajax 
     $('#cat-gender-view').on('click', '.cart-btn-cat', function(){
         console.log('clicked');
-        prod_id = $(this).attr('data-id');
-        console.log(prod_id);
-        data = {
-            'prod_id':prod_id
+    prod_id = $(this).attr('data-id');
+    console.log(prod_id);
+    data = {
+        'prod_id':prod_id
         }
-        $.ajax({
-            url:"{% url 'add_product_cart' %}",
-            method:'GET',
-            data:data,
-            success:function(response){
-                console.log('product added to cart');
+    $.ajax({
+        url:"{% url 'add_product_cart' %}",
+    method:'GET',
+    data:data,
+    success:function(response){
+        console.log('product added to cart');
             }
         })
     })
@@ -92,24 +99,24 @@
     $('button.plus').click(function(){
         // console.log('clicked');
         cart_id = $(this).attr('data-id');
-        sqe = this.parentNode.children[1];
-        // console.log(sqe);
-        price_el = this.parentElement.parentElement.children[1];
-        // console.log(price_el);
-        let all_prod_price = document.getElementById('porducts-total-price')
-        let total_with_shipping = document.getElementById('total-with-shipping')
+    sqe = this.parentNode.children[1];
+    // console.log(sqe);
+    price_el = this.parentElement.parentElement.children[1];
+    // console.log(price_el);
+    let all_prod_price = document.getElementById('porducts-total-price')
+    let total_with_shipping = document.getElementById('total-with-shipping')
 
-        data = {'cart_id':cart_id}
-        $.ajax({
-            url:"{% url 'plus_product_cart' %}",
-            method:'GET',
-            data:data,
-            success:function(response){
-                // console.log(response)
-                sqe.value = response.cart_quantity;
-                price_el.innerText = `$${response.obj_total_price}`;
-                all_prod_price.innerText = `$${response.products_total_price}`;
-                total_with_shipping.innerText = `$${response.products_total_price_with_shipping_price}`;
+    data = {'cart_id':cart_id}
+    $.ajax({
+        url:"{% url 'plus_product_cart' %}",
+    method:'GET',
+    data:data,
+    success:function(response){
+        // console.log(response)
+        sqe.value = response.cart_quantity;
+    price_el.innerText = `$${response.obj_total_price}`;
+    all_prod_price.innerText = `$${response.products_total_price}`;
+    total_with_shipping.innerText = `$${response.products_total_price_with_shipping_price}`;
             }
         })
     })
@@ -119,24 +126,24 @@
     $('button.minus').click(function(){
         // console.log('clicked');
         cart_id = $(this).attr('data-id');
-        sqe = this.parentNode.children[1];
-        // console.log(sqe);
-        price_el = this.parentElement.parentElement.children[1];
-        // console.log(price_el);
-        let all_prod_price = document.getElementById('porducts-total-price')
-        let total_with_shipping = document.getElementById('total-with-shipping')
+    sqe = this.parentNode.children[1];
+    // console.log(sqe);
+    price_el = this.parentElement.parentElement.children[1];
+    // console.log(price_el);
+    let all_prod_price = document.getElementById('porducts-total-price')
+    let total_with_shipping = document.getElementById('total-with-shipping')
 
-        data = {'cart_id':cart_id}
-        $.ajax({
-            url:"{% url 'minus_product_cart' %}",
-            method:'GET',
-            data:data,
-            success:function(response){
-                // console.log(response)
-                sqe.value = response.cart_quantity;
-                price_el.innerText = `$${response.obj_total_price}`;
-                all_prod_price.innerText = `$${response.products_total_price}`;
-                total_with_shipping.innerText = `$${response.products_total_price_with_shipping_price}`;
+    data = {'cart_id':cart_id}
+    $.ajax({
+        url:"{% url 'minus_product_cart' %}",
+    method:'GET',
+    data:data,
+    success:function(response){
+        // console.log(response)
+        sqe.value = response.cart_quantity;
+    price_el.innerText = `$${response.obj_total_price}`;
+    all_prod_price.innerText = `$${response.products_total_price}`;
+    total_with_shipping.innerText = `$${response.products_total_price_with_shipping_price}`;
             }
         })
     })

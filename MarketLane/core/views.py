@@ -6,6 +6,7 @@ from .forms import CustomerAddressForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 # Create your views here.
 
 class HomeView(ListView):
@@ -171,9 +172,21 @@ class AddProductCart(LoginRequiredMixin,View):
         user = self.request.user
         # print(user)
         prod_id = self.request.GET.get('prod_id')
-        # print(prod_id)
+        print(prod_id)
         prod_obj = Product.objects.get(id=prod_id)
-        ProductCart(user=user, product=prod_obj).save()
+        prod_exist = False
+        prod_exist = ProductCart.objects.filter(Q(product=prod_obj)&Q(user=user)).exists()
+
+        # if product already in cart then it will increase ProductCart quantity
+        if prod_exist == True:
+            item = ProductCart.objects.get(product=prod_obj)
+            print(item)
+            item.quantity += 1
+            item.save()
+        
+        # else it will add product to Product Cart 
+        else:
+            ProductCart(user=user, product=prod_obj).save()
         return JsonResponse({'response':True})
 
 class RemoveProductCart(LoginRequiredMixin,View):
