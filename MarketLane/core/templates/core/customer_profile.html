@@ -1,0 +1,52 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}
+    HOME
+{% endblock title %}
+{% block navbar %}
+    <div>
+        {% include "core/navbar.html" %}
+    </div>
+{% endblock navbar %}
+{% block body-content %}
+    <div class="d-flex flex-column align-items-center mt-5">
+        <div class="container row my-5">
+            <div class="col-5 position-relative location-form">
+                <h2 class="address-heading">Enter Your Address</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% for form in form %}
+                    <div class="location-field">
+                        {{form.label_tag}}
+                        {{form}}
+                    </div>
+                    {% endfor %}
+                    <input class="bg-info" type="submit" value='add'> 
+                </form>
+            </div>
+            <div class="col-6 offset-1">
+                <h2 class="address-heading">Shipping Address</h2>
+                {% for cus_loc_object in cus_loc_objects %}
+                <div class="address-container">
+                    <div class="address-details">
+                      <p><strong>Name :</strong> {{cus_loc_object.name|capfirst}}</p>
+                      <p><strong>Address :</strong> {{cus_loc_object.address}}</p>
+                      <p><strong>City :</strong> {{cus_loc_object.city}}</p>
+                      <p><strong>State :</strong> {{cus_loc_object.state}}</p>
+                      <p><strong>Zip Code :</strong> {{cus_loc_object.zip_code}}</p>
+                      <p><strong>Phone :</strong> {{cus_loc_object.phone}}</p>
+                    </div>
+                    <div class="address-actions">
+                        <button class="btn-icon btn-edit bg-info text-decoration-none" data-id={{cus_loc_object.id}}><i class="fas fa-edit"></i></button>
+                        <a href="{% url 'customer_address_del' cus_loc_object.id %}" class="btn-icon btn-delete bg-info mx-2" data-id={{cus_loc_object.id}}><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </div>                  
+                {% endfor %}                 
+            </div>
+        </div>
+    </div>
+{% endblock body-content %}
+
+{% block ajax %}
+<script src="{% static 'core/js/ajax_address.js' %}"></script>
+{% endblock ajax %}

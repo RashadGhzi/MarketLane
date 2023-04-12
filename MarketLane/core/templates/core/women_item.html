@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}women products{% endblock title %}
+{% block women-page-css %}
+    <link rel="stylesheet" href="{% static 'core/css/women_page_style.css' %}">
+{% endblock women-page-css %}
+{% block navbar %}
+    <div>
+        {% include "core/navbar.html" %}
+    </div>
+{% endblock navbar %}
+{% block body-content %}
+  <section>
+    <div class="banner">
+        <img src="{% static 'core/images/img-1.jpg' %}" alt="Women Products Banner">
+        <div class="banner-text">
+          <h2>Shop the Latest Women's Fashion</h2>
+          <p>Discover our collection of women's clothing, shoes, and accessories.</p>
+          <a href="#">Shop Now</a>
+        </div>
+    </div>
+  </section>
+  
+  <section class="women-section-2">
+    <div class="row justify-content-center">
+      {% for women_product in women_products %}
+      <div class="d-flex flex-column align-items-center women-product">
+        <div class="women-product-card">
+          <div class="product-card-image">
+            <img src="{{women_product.product_image.url}}" alt="{{women_product.title}}">
+            <div class="product-card-hover">
+              <a href="{% url 'product_view' women_product.id %}">Quick View</a>
+            </div>
+          </div>
+          <div class="product-card-details">
+            <h4> {{women_product.title|slice:":35"}} </h4>
+            <p class="product-card-price">${{women_product.selling_price}}</p>
+            <div class="product-card-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <button class="product-card-btn" data-id="{{women_product.id}}">Add to Cart</button>
+          </div>
+        </div> 
+      </div> 
+      {% endfor %}
+    </div>             
+  </section>
+{% endblock body-content %}
+
+<!-- using ajax to adding product to cart -->
+{% block ajax %}
+  {% include "core/ajax/ajax_cart.html" %}
+{% endblock ajax %}

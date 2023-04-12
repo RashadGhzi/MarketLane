@@ -1,0 +1,63 @@
+<script>
+
+    // This is for gents product category show
+    $('#gents_prod').click(function(){
+        console.log('clicked');
+        $.ajax({
+            url:"{% url 'category_product_men' %}",
+            method:'GET',
+            data:{},
+            success:function(response){
+                console.log(response);
+                let prod_obj = response.cat_gen_prod;
+                let cat_gen_html = '';
+                let img_url_list = response.image_url_list;
+                for(let i=0; i<prod_obj.length; i++){
+                    cat_gen_html += `<div class='product-card'><a href="product/view/${prod_obj[i].id}/" class="product-image"><img src="${img_url_list[i]}" alt=""></a><div class="product-info"><h3 class="product-title">${prod_obj[i].title.slice(0,35)}</h3><p class="product-price row align-items-center">$${prod_obj[i].selling_price}<button class="cart-btn-cat" data-id=${prod_obj[i].id}><i class="fas fa-shopping-cart"></i></button></p><div class="product-card-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></div></div></div>`;
+                } 
+                $('#cat-gender-view').html(cat_gen_html);
+            }
+        })
+        $('#ladies_prod').removeClass("active-button");
+        let active_btn = document.getElementById("gents_prod");
+        active_btn.classList.add("active-button");
+
+        // alert banner gender
+        let alert_gen = $('#cat-gen-alert');
+        alert_gen.html('Showing Male products using Ajax');
+        alert_gen.addClass('alert alert-success col-6');
+
+    })
+
+
+    // This is for ladies product category show
+    $('#ladies_prod').click(function(){
+        console.log('clicked');
+        $.ajax({
+            url:"{% url 'category_product_women' %}",
+            method:'GET',
+            data:{},
+            success:function(response){
+                console.log(response);
+                let prod_obj = response.cat_gen_prod;
+                let cat_gen_html = '';
+                let img_url_list = response.image_url_list;
+                for(let i=0; i<prod_obj.length; i++){
+                    cat_gen_html += `<div class='product-card'><a href="product/view/${prod_obj[i].id}/" class="product-image"><img src="${img_url_list[i]}" alt=""></a><div class="product-info"><h3 class="product-title">${prod_obj[i].title.slice(0,35 )}</h3><p class="product-price row align-items-center">$${prod_obj[i].selling_price}<button class="cart-btn-cat" data-id=${prod_obj[i].id}><i class="fas fa-shopping-cart"></i></button></p><div class="product-card-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></div></div></div>`;
+                } 
+                $('#cat-gender-view').html(cat_gen_html);
+            }
+        })
+        $('#gents_prod').removeClass("active-button");
+        active_btn = document.getElementById("ladies_prod");
+        active_btn.classList.add("active-button");
+
+        // alert banner gender
+        let alert_gen = $('#cat-gen-alert');
+        alert_gen.html('Showing Female products using Ajax');
+        alert_gen.addClass('alert alert-success col-6');
+    })
+
+    
+
+</script>

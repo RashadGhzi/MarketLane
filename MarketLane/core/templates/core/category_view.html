@@ -1,0 +1,49 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Catergory{% endblock title %}
+{% block category-view-css %}
+    <link rel="stylesheet" href="{% static 'core/css/category_view_style.css' %}">
+{% endblock category-view-css %}
+{% block navbar %}
+    <div>
+        {% include "core/navbar.html" %}
+    </div>
+{% endblock navbar %}
+{% block body-content %}
+<div class="d-flex flex-column align-items-center justify-content-center my-md-5">
+    <div class="sub-nav my-5">
+        <button type='button' class="" id="gents_prod">Gents</button>
+        <button type='button' class="" id="ladies_prod">Ladies</button>
+    </div>
+    <div class="" id="cat-gen-alert"></div>
+    <div class="row justify-content-center" id="cat-gender-view">
+        {% for product in data %}
+        <div class="product-card">
+          <a href="{% url 'product_view' product.id %}" class="product-image">
+            <img src="{{product.product_image.url}}" alt="{{product.title}}">
+          </a>
+          <div class="product-info">
+            <h3 class="product-title">{{product.title|slice:":38"}}</h3>
+            <p class="product-price row align-items-center">${{product.selling_price}}
+              <button class="cart-btn-cat" data-id={{product.id}}>
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </p>              
+            <div class="product-card-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+</div>
+{% endblock body-content %}
+
+{% block ajax %}
+    {% include "core/ajax/ajax_category_view.html" %}
+    {% include "core/ajax/ajax_cart.html" %}
+{% endblock ajax %}

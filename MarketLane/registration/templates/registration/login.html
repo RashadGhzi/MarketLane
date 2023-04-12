@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}register{% endblock title %}
+{% block registration-css %}
+    <link rel="stylesheet" href="{% static 'registration/css/registration_style.css' %}">
+{% endblock registration-css %}
+{% block navbar %}
+    <div class="">
+        {% include "core/navbar.html" %}
+    </div>
+{% endblock navbar %}
+{% block body-content %}
+    <div class="d-flex flex-column justify-content-center align-items-center vh-100 vw-100 bg-img position-relative" style="background-image: url('{% static 'registration/images/tree.png' %}');">
+        <div class="d-flex justify-content-center align-items-center">
+            {% include "core/message.html" %}
+        </div>
+        <div class="login-form bg-transparent d-flex flex-column justify-content-center align-items-center">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for form in form %} 
+                <div class="label-input d-flex flex-column justify-content-center align-items-center">
+                    <div class="label-item mb-4">
+                        {{form.label_tag}}
+                        {{form}}
+                    </div>
+                    <small class="d-block text-danger">
+                        {{form.errors|striptags}}
+                    </small>
+                </div>
+                {% endfor %}
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <input class="form-check-input" type="checkbox" name="remember-check" id="remember-check">
+                        <label class="ms-2 text-black" for="remember-check">remember me</label>
+                    </div>
+                    <a href="{% url 'password_reset' %}" class="forgot-password fw-semibold ms-3">
+                        Forgot Password?
+                    </a>
+                </div>
+                <input class="form-submit-btn my-3 fw-bold" type="submit" value="Login">
+            </form>
+            <div class="text-white">Don't have an account? <a href="{% url 'user_registration' %}" class="fw-bold text-decoration-none text-black">Register</a></div>           
+        </div>
+    </div>
+{% endblock body-content %}

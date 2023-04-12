@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}
+    Product View
+{% endblock title %}
+{% block product-view-css %}
+<link rel="stylesheet" href="{% static 'core/css/product_view_style.css' %}">
+{% endblock product-view-css %}
+{% block navbar %}
+    <div>
+        {% include "core/navbar.html" %}
+    </div>
+{% endblock navbar %}
+{% block body-content %}
+<div class="product-container">
+    <div class="product-image">
+      <img src="{{product_obj.product_image.url}}" alt="Product Image">
+    </div>
+    <div class="product-info">
+      <h1>{{product_obj.title}}</h1>
+      <p>{{product_obj.description}}</p>
+      <h2>${{product_obj.selling_price}}</h2>
+      <form action="">
+        <div class="product-form">
+            <div class="form-group">
+              <label for="quantity">Quantity:</label>
+              <div class="quantity-control">
+                <button class="decrement">-</button>
+                <input type="number" id="quantity" name="quantity" min="1" value="1">
+                <input type="hidden" name="prod_id" value="{{product_obj.id}}">
+                <button class="increment">+</button>
+              </div>
+            </div>
+        </div>
+        <button type="button" class="add-to-cart" id="prod-view-cart" >Add to Cart</button>
+        <button type="submit" class="buy-now-btn mx-2">Buy Now</button>
+      </form>      
+    </div>
+</div>
+  
+{% endblock body-content %}
+{% block ajax %}
+  {% include "core/ajax/ajax_cart.html" %}
+{% endblock ajax %}

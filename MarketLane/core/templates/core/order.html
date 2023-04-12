@@ -1,0 +1,11 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Catergory{% endblock title %}
+{% block category-view-css %}
+    <link rel="stylesheet" href="{% static 'core/css/category_view_style.css' %}">
+{% endblock category-view-css %}
+{% block navbar %}
+    <div>
+        {% include "core/navbar.html" %}
+    </div>
+{% endblock navbar %}

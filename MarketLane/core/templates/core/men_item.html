@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}women products{% endblock title %}
+{% block women-page-css %}
+    <link rel="stylesheet" href="{% static 'core/css/men_page_style.css' %}">
+{% endblock women-page-css %}
+{% block navbar %}
+    <div>
+        {% include "core/navbar.html" %}
+    </div>
+{% endblock navbar %}
+{% block body-content %}
+  <section>
+    <div class="banner">
+        <img src="{% static 'core/images/men-ban.png' %}" alt="Women Products Banner">
+        <div class="banner-text">
+          <h2>Shop the Latest Men's Fashion</h2>
+          <p class="text-white">Discover the latest trends in men's fashion with our exclusive collection of clothing, footwear, and accessories.Browse our collection now and elevate your wardrobe with premium quality products at affordable prices.</p>
+          <a href="#">Shop Now</a>
+        </div>
+    </div>
+  </section>
+  
+  <section class="men-section-2">
+    <div class="row justify-content-center">
+      {% for men_product in men_products %}
+      <div class="d-flex flex-column align-items-center men-product">
+        <div class="men-product-card">
+          <div class="product-card-image">
+            <img src="{{men_product.product_image.url}}" alt="{{men_product.title}}">
+            <div class="product-card-hover">
+              <a href="{% url 'product_view' men_product.id %}">Quick View</a>
+            </div>
+          </div>
+          <div class="product-card-details">
+            <h4> {{men_product.title|slice:":35"}} </h4>
+            <p class="product-card-price">${{men_product.selling_price}}</p>
+            <div class="product-card-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <button class="product-card-btn" data-id='{{men_product.id}}'>Add to Cart</button>
+          </div>
+        </div> 
+      </div> 
+      {% endfor %}
+    </div>             
+  </section>
+{% endblock body-content %}
+ 
+<!-- using ajax to adding product to cart -->
+{% block ajax %}
+  {% include "core/ajax/ajax_cart.html" %}
+{% endblock ajax %}

@@ -1,0 +1,178 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}
+    HOME
+{% endblock title %}
+{% block navbar %}
+    <div>
+        {% include "core/navbar.html" %}
+    </div>
+{% endblock navbar %}
+{% block body-content %}
+    <!--working with section 1-->
+    <section class="section-1">
+        <div class="row home-banner mt-2">
+            <div class="col-md-6 img-center img-cover p-5 border-end border-3 border-white" style="background-image:url('{% static 'core/images/img-1.jpg' %}')">
+                <div class="display-4 text-white " style="font-family: 'Dancing Script', cursive;">Welcome to</div>
+                <div class="display-4 text-danger " style="font-family: 'Dancing Script', cursive;">MarketLane <b class="text-light">SHOP</b></div>
+                <a href="" class="h3 text-decoration-none text-warning first-link ">SHOP NOW</a>
+            </div>
+            <div class="col-md-3">
+                <div class=" border border-3 border-white banner-size img-cover img-center" style="background-image:url('{% static 'core/images/img-14.jpg' %}')">
+                    <div class="d-flex flex-column align-items-start mt-5 ms-2 nav-a">
+                        <div class="h3 text-white " style="font-family: 'Dancing Script', cursive;">
+                            Buy Sunglasses
+                        </div>
+                        <a href="" class="text-decoration-none text-warning" style="font-family: cursive;">SHOP NOW</a>
+                    </div>
+                </div>
+                <div class="border border-3 border-white banner-size img-center img-cover" style="background-image:url('{% static 'core/images/img-13.jpg' %}')">
+                    <div class="d-flex flex-column align-items-start mt-5 ms-2 nav-a">
+                        <div class="h3 text-white " style="font-family: 'Dancing Script', cursive;">
+                            Buy Shoes
+                        </div>
+                        <a href="" class="text-decoration-none text-warning" style="font-family: cursive;">SHOP NOW</a>
+                    </div>
+                </div> 
+            </div>
+            <div class="col-md-3">
+                <div class=" border border-3 border-white banner-size img-center img-cover" style="background-image:url('{% static 'core/images/img-15.jpg' %}')" >
+                    <div class="d-flex flex-column align-items-start mt-5 ms-2 nav-a">
+                        <div class="h3 text-white " style="font-family: 'Dancing Script', cursive;">
+                            Women's Fashion
+                        </div>
+                        <a href="" class="text-decoration-none text-warning" style="font-family: cursive;">SHOP NOW</a>
+                    </div>
+                </div>
+                <div class="border border-3 border-white banner-size img-center img-cover" style="background-image:url('{% static 'core/images/img-16.jpg' %}')">
+                    <div class="d-flex flex-column align-items-start mt-5 ms-2 nav-a">
+                        <div class="h3 text-white " style="font-family: 'Dancing Script', cursive;">
+                            Men's Fashion
+                        </div>
+                        <a href="" class="text-decoration-none text-warning" style="font-family: cursive;">SHOP NOW</a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </section>
+
+    <!-- carousel for product show-->
+    <section class="section-2">
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner ">
+              <div class="carousel-item active">
+                <h3 class="font-dance fw-bold mt-5 mb-4 text-center">New Arrival Sunglassess for you</h3>
+                <div class="row justify-content-center">
+                    {% for product_sunglass in products_sunglass %}
+                      <div class="product-card">
+                        <a href="{% url 'product_view' product_sunglass.id %}" class="product-image">
+                          <img src="{{product_sunglass.product_image.url}}" alt="{{product_sunglass.title}}">
+                          <div class="product-badge">New Arrival</div>
+                        </a>
+                        <div class="product-info">
+                          <h3 class="product-title">{{product_sunglass.title|slice:":38"}}</h3>
+                          <p class="product-price">${{product_sunglass.selling_price}}</p>
+                          <button class="product-button" data-id='{{product_sunglass.id}}'>Add to Cart</button>
+                        </div>
+                      </div> 
+                    {% endfor %} 
+                </div>
+              </div>
+              <div class="carousel-item ">
+                <h3 class="font-dance fw-bold mt-5 mb-4 text-center">New Arrival Shoes for you</h3>
+                <div class="row justify-content-center">
+                    {% for product_shoe in products_shoes %}
+                      <div class="product-card">
+                        <a href="{% url 'product_view' product_shoe.id %}" class="product-image">
+                          <img src="{{product_shoe.product_image.url}}" alt="{{product_shoe.title}}">
+                          <div class="product-badge">New Arrival</div>
+                        </a>
+                        <div class="product-info">
+                          <h3 class="product-title">{{product_shoe.title|slice:":38"}}</h3>
+                          <p class="product-price">${{product_shoe.selling_price}}</p>
+                          <button class="product-button" data-id='{{product_shoe.id}}'>Add to Cart</button>
+                        </div>
+                      </div>
+                    {% endfor %}
+                </div>
+              </div>
+              <div class="carousel-item ">
+                <h3 class="font-dance fw-bold mt-5 mb-4 text-center">New Arrival Cloth for you</h3>
+                <div class="row justify-content-center">
+                    {% for product_cloth in products_cloth %}
+                      <div class="product-card">
+                        <a href="{% url 'product_view' product_cloth.id %}" class="product-image">
+                          <img src="{{product_cloth.product_image.url}}" alt="{{product_cloth.title}}">
+                          <div class="product-badge">New Arrival</div>
+                        </a>
+                        <div class="product-info">
+                          <h3 class="product-title"> {{product_cloth.title|slice:":38"}} </h3>
+                          <p class="product-price"> ${{product_cloth.selling_price}} </p>
+                          <button class="product-button" data-id='{{product_cloth.id}}'>Add to Cart</button>
+                        </div>
+                      </div>
+                    {% endfor %}                
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+    </section>
+    
+
+    <!--section 3 for sell is live banner-->
+    <section class="section-3">
+      <div class="sale-banner">
+        <p class="sale-text">Sale is Live!</p>
+      </div>      
+    </section>
+
+    <!--section 4 -->
+    <section class="section-4">
+      <div class="d-flex flex-column align-items-center justify-content-center m-md-5">
+        <div class="sub-nav">
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        {% for product in products %}
+        <div class="product-card">
+          <a href="{% url 'product_view' product.id %}" class="product-image">
+            <img src="{{product.product_image.url}}" alt="{{product.title}}">
+          </a>
+          <div class="product-info">
+            <h3 class="product-title">{{product.title|slice:":38"}}</h3>
+            <p class="product-price row align-items-center">${{product.selling_price}}
+              <button class="cart-btn" data-id={{product.id}}>
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </p>              
+            <div class="product-card-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    </section>
+
+{% endblock body-content %}
+
+{% block ajax %}
+  {% include "core/ajax/ajax_cart.html" %}
+{% endblock ajax %}
