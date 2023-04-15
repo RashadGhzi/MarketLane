@@ -1,83 +1,84 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% block title %}Catergory{% endblock title %}
-{% block category-view-css %}
-<link rel="stylesheet" href="{% static 'core/css/category_view_style.css' %}">
-{% endblock category-view-css %}
+{% block css-link %}
+  <link rel="stylesheet" href="{% static 'core/css/check_out.css' %}">
+{% endblock css-link %}
 {% block navbar %}
 <div>
   {% include "core/navbar.html" %}
 </div>
 {% endblock navbar %}
 {% block body-content %}
-<div>
-  <div class="container-md">
-    <div class="row margin-top">
-      <div class="col-6 order-summary">
-        <div class="display-6 text-info">Order Summary</div>
-        {% for cart in carts %}
-        <div class="d-flex flex-column mt-4 ms-3 border-bottom border-1 border-secondary">
-          <div class="d-flex align-items-center">
-            <a href="{% url 'product_view' cart.product.id %}"
-              class="fw-semibold text-danger h5 text-decoration-none">{{cart.product.title}}</a>
-          </div>
-          <div class="d-flex align-items-center">
-            <span class="fw-medium text-secondary h6">Quantity :</span>
-            <span class="fw-semibold text-dark h6 ms-2">{{cart.quantity}}</span>
-          </div>
-          <div class="d-flex align-items-center">
-            <span class="fw-bold text-dark h6 d-inline">Price :</span>
-            <span class="fw-semibold text-dark h6 d-inline ms-2">${{cart.get_total_cost}}</span>
-          </div>
-        </div>
-        {% endfor %}
-        {% if carts %}
-        <h6 class="text-dark mt-4">All product price : ${{products_total_price}}</h6>
-        <h6 class="text-dark ">Shipping : $70</h6>
-        <h5 class="text-danger fw-bold mb-5">Total Cost : ${{products_total_price_with_shipping_price}}</h5>
-        {% else %}
-        <h5 class="text-danger my-5">Your cart is currently empty. Please add products to your cart before proceeding with checkout.</h5>
-        {% endif %}
-
-      </div>
-      <div class="col-5 offset-1 ">
-        <div class="display-6 text-info">Select Shipping Address</div>
-        <form action="/payment/done">
-          {% for address in address %}
-          <div class="my-5">
-            <h5 class="text-info">{{address.name|capfirst}}</h5>
-            <div class="d-flex align-items-center">
-              <span class="">{{address.address}},</span>
-              <span class="mx-2">{{address.city}},</span>
-              <span class="mx-2">{{address.state}},</span>
-              <span class="mx-2">{{address.zip_code}},</span>
-              <span class="mx-2">{{address.phone}}</span>
+  <div class='bg'>
+    <div class="container col-lg-10 col-md-12 mt-md-5 pb-5">
+      <div class="row">
+        <div class="col-lg-6 col-md-7 d-flex flex-column align-items-center pt-5 bg-white rounded-3 mt-5">
+          {% for cart in carts %}
+            <div class="product-checkout-banner ">
+              <div class="product-image">
+                <img src="{{cart.product.product_image.url}}" alt="Product Image">
+              </div>
+              <div class="product-in">
+                <div class="d-flex align-items-baseline">
+                  <div class="mx-md-5 mx-3">
+                    <h2 class="fm-puff">Quantity</h2>
+                    <p class="price">{{cart.quantity}} X {{cart.product.selling_price}}</p>
+                  </div>
+                  <div class="mx-md-5 mx-3">
+                    <h2 class="fm-puff">Price</h2>
+                    <p class="price">${{cart.get_total_cost}}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="address-actions">
-              <a class="btn-icon btn-edit bg-info text-decoration-none"><i class="fas fa-edit"></i></a>
-              <a href="{% url 'customer_address_del' address.id %}" class="btn-icon btn-delete bg-info mx-2 "><i
-                  class="fas fa-trash-alt"></i></a>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="add_id" id="address-{{forloop.counter}}"
-                value="{{address.id}}" required>
-              <label class="form-check-label" for="address-{{forloop.counter}}">
-                Address-{{forloop.counter}}
-              </label>
-            </div>
-          </div>
           {% endfor %}
-          <a href="{% url 'customer_address' %}" class="btn btn-info px-5 py-2 my-3 d-block">add address</a>
-          {% if address %}
-          <button type="submit" class='btn btn-warning px-5 py-2 my-2'>continue</button>
-          {% endif %}
-        </form>
+        </div>
+          <div class="col-md-5 ms-lg-5 mt-5">
+            <h6 class="rounded-2 bg-white py-2 px-4 fw-bold fm-puff ">Payment Methods</h6>
+            <h6 class="rounded-2 bg-white py-4 px-4 fw-bold fm-puff mb-4">PayPal</h6>
+            <h6 class="rounded-2 bg-white py-2 px-4 fw-bold fm-puff ">Amount</h6>
+            <h6 class="rounded-2 bg-white py-4 px-4 fw-bold fm-puff mb-4 d-flex flex-column">
+              <p>Total Amount&nbsp : &nbsp$&nbsp<span class="text-danger">{{products_total_price}}</span> </p>
+              <p>Total Amount with Shipping $70 &nbsp:&nbsp $&nbsp<span class="text-danger">{{products_total_price_with_shipping_price}}</span> </p>
+            </h6>
+            <h6 class="rounded-2 bg-white py-2 px-4 fw-bold fm-puff">Billing Address</h6>
+            <div class="rounded-2 bg-white py-2 px-4 fw-semibold">
+              <form action="/payment/done">
+                {% for address in address %}
+                <div class="billing-address fm-puff mb-3">
+                  <h5 class="text-info">{{address.name|capfirst}}</h5>
+                  <div class="d-flex flex-column align-items-start">
+                    <p class="">Address &nbsp :&nbsp {{address.address}}</p>
+                    <p class="">City &nbsp:&nbsp {{address.city}}</p>
+                    <p class="">State &nbsp:&nbsp {{address.state}}</p>
+                    <p class="">Zip Code &nbsp:&nbsp {{address.zip_code}}</p>
+                    <p class="">Phone &nbsp:&nbsp {{address.phone}}</p>
+                  </div>
+                  <div class="address-actions">
+                    <a class="btn-icon btn-edit bg-info text-decoration-none"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'customer_address_del' address.id %}" class="btn-icon btn-delete bg-info mx-2 "><i
+                        class="fas fa-trash-alt"></i></a>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="add_id" id="address-{{forloop.counter}}"
+                      value="{{address.id}}" required>
+                    <label class="form-check-label" for="address-{{forloop.counter}}">
+                      Address-{{forloop.counter}}
+                    </label>
+                  </div>
+                </div>
+                {% endfor %}
+                <a href="{% url 'customer_address' %}" class="btn btn-info py-2 my-3 d-block fw-bold">add address</a>
+                <button type="submit" class="btn btn-warning py-3 my-3 d-block fw-bold fm-puff w-100">continue</button>
+                <!--Paymen banner-->
+              </form>
+            </div>
+            
+          </div>  
       </div>
     </div>
   </div>
-</div>
 {% endblock body-content %}
 
-{% block ajax %}
-<script src="{% static 'core/js/ajax_address.js' %}"></script>
-{% endblock ajax %}
+{% block payment-gateway %}{% endblock payment-gateway %}

@@ -7,6 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from core.models import ProductCart
 # Create your views here.
 
 class RegistrationView(FormView):
@@ -50,6 +51,12 @@ class PasswordChange(LoginRequiredMixin,PasswordChangeView):
     login_url = reverse_lazy('user_login')
     template_name = 'registration/password_change_view.html'
     success_url = reverse_lazy('password_change_done')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cart"] = len(ProductCart.objects.filter(user=self.request.user))
+        return context
+    
 
 class PasswordChangeDone(LoginRequiredMixin,PasswordChangeDoneView):
     login_url = reverse_lazy('user_login')

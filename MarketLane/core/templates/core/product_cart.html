@@ -6,6 +6,11 @@
 {% block product-view-css %}
 <link rel="stylesheet" href="{% static 'core/css/product_view_style.css' %}">
 {% endblock product-view-css %}
+
+<!--For responsive style-->
+{% block responsive-css %}
+  <link rel="stylesheet" href="{% static 'core/css/responsive.css' %}">
+{% endblock responsive-css %}
 {% block navbar %}
     <div>
         {% include "core/navbar.html" %}
@@ -13,34 +18,27 @@
 {% endblock navbar %}
 {% block body-content %}
 <div class="cart-view">
-    <div class="row justify-content-center my-5">
-        <h1 class="cart-title ">Shopping Cart</h1>
-        {% for cart_product in cart_products %}
-          <div class="col-10">
-            <div class="cart-items">
-              <div class="cart-item">
-                  <a href="{% url 'product_view' cart_product.product.id %}" class="item-image">
-                  <img src="{{cart_product.product.product_image.url}}" alt="Product Image">
-                  </a>
-                  <div class="item-details">  
-                    <h3 class="item-name">{{cart_product.product.title}}</h3>
-                    <!-- <p class="item-description">{{cart_product.product.description|slice:':200'}}</p> -->
-                    <p class="item-price">${{cart_product.get_total_cost}}</p>
-                    <div class="item-quantity mb-5">
-                        <button class="quantity-btn minus" data-id="{{cart_product.id}}">-</button>
-                        <input type="text" class="quantity-input" value="{{cart_product.quantity}}">
-                        <button class="quantity-btn plus" data-id="{{cart_product.id}}">+</button>
-                    </div>
-                    <a href="{% url 'remove_product_cart' cart_product.id %}" class="btn btn-outline-danger py-2 px-5">Remove</a>
-                  </div>
+    <div class="row justify-content-center my-5 ">
+        <div class="col-lg-6 col-md-8 col-12 mt-4">
+          {% for cart_product in cart_products %}
+            <div class="product-cart-banner">
+              <a class="product-image-cart text-decoration-none" href="{% url 'product_view' cart_product.product.id %}">
+                <img src="{{cart_product.product.product_image.url}}" alt="Product Image">
+              </a>
+              <div class="product-in">
+                <h2>{{cart_product.product.title}}</h2>
+                <p class="price">${{cart_product.get_total_cost}}</p>
+                <div class="quantity">
+                  <button class="minus-btn minus" data-id="{{cart_product.id}}">-</button>
+                  <input type="text" class="count quantity-input" value="{{cart_product.quantity}}">
+                  <button class="plus-btn plus" data-id="{{cart_product.id}}">+</button>
+                </div>
               </div>
-            </div>
-          </div>
-
-          <!--horizontal line-->
-          <hr class="col-10 border border-dark border-1 opacity-50 my-4">
-        {% endfor %}
-        <div class="">  
+              <a href="{% url 'remove_product_cart' cart_product.id %}" class="remove-btn">&times;</a>
+            </div>              
+          {% endfor %}
+        </div>
+        <div class="col-lg-5 col-md-4">  
             <div class="cart-total">
                 <div class="cart-total-heading">
                   <h3>Cart Total</h3>

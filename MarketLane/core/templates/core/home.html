@@ -69,7 +69,7 @@
                 <h3 class="font-dance fw-bold mt-5 mb-4 text-center">New Arrival Sunglassess for you</h3>
                 <div class="row justify-content-center">
                     {% for product_sunglass in products_sunglass %}
-                      <div class="product-card">
+                      <div class="product-card-new">
                         <a href="{% url 'product_view' product_sunglass.id %}" class="product-image">
                           <img src="{{product_sunglass.product_image.url}}" alt="{{product_sunglass.title}}">
                           <div class="product-badge">New Arrival</div>

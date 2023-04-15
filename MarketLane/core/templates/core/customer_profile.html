@@ -38,7 +38,7 @@
                     </div>
                     <div class="address-actions">
                         <button class="btn-icon btn-edit bg-info text-decoration-none" data-id={{cus_loc_object.id}}><i class="fas fa-edit"></i></button>
-                        <!-- <a href="{% url 'customer_address_del' cus_loc_object.id %}" class="btn-icon btn-delete bg-info mx-2" data-id={{cus_loc_object.id}}><i class="fas fa-trash-alt"></i></a> -->
+                        <a href="{% url 'customer_address_del' cus_loc_object.id %}" class="btn-icon btn-delete bg-info mx-2" data-id={{cus_loc_object.id}}><i class="fas fa-trash-alt"></i></a> 
                     </div>
                 </div>                  
                 {% endfor %} 

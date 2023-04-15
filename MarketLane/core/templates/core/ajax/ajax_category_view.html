@@ -2,13 +2,13 @@
 
     // This is for gents product category show
     $('#gents_prod').click(function(){
-        console.log('clicked');
+        //console.log('clicked');
         $.ajax({
             url:"{% url 'category_product_men' %}",
             method:'GET',
             data:{},
             success:function(response){
-                console.log(response);
+                //console.log(response);
                 let prod_obj = response.cat_gen_prod;
                 let cat_gen_html = '';
                 let img_url_list = response.image_url_list;
@@ -32,13 +32,13 @@
 
     // This is for ladies product category show
     $('#ladies_prod').click(function(){
-        console.log('clicked');
+        //console.log('clicked');
         $.ajax({
             url:"{% url 'category_product_women' %}",
             method:'GET',
             data:{},
             success:function(response){
-                console.log(response);
+                //console.log(response);
                 let prod_obj = response.cat_gen_prod;
                 let cat_gen_html = '';
                 let img_url_list = response.image_url_list;

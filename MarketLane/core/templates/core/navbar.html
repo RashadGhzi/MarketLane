@@ -1,5 +1,5 @@
 <div class="nav">
-    <a href="{% url 'home' %}" class="logo">MarketLane</a>
+    <a href="{% url 'home' %}" class="logo ">MarketLane</a>
     <div class="nav-a d-flex align-items-center list-unstyled">
         <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'men_products' %}">Men's</a>
@@ -43,7 +43,7 @@
         {% if request.user.is_authenticated %}
         <a class="cart-icon" href="{% url 'product_cart' %}">
             <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">0</span>
+            <span class="cart-count" id='cart-count'>{{cart}}</span>
         </a>
         {% endif %}
     </div>
