@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.contrib import messages
 # Create your views here.
 
 
@@ -169,7 +170,7 @@ class CustomerAddressDel(View):
 class ProductCartView(LoginRequiredMixin,View):
     login_url = reverse_lazy('user_login')
     def get(self, request, *args, **kwargs):
-        cart = len(ProductCart.objects.filter(user=self.request.user))
+        cart_len = len(ProductCart.objects.filter(user=self.request.user))
         cart_products = ProductCart.objects.filter(user=request.user).order_by('-id')
         products_total_price = 0.0
 
@@ -181,7 +182,7 @@ class ProductCartView(LoginRequiredMixin,View):
                 'cart_products':cart_products,
                 'products_total_price':products_total_price,
                 'products_total_price_with_shipping_cost':products_total_price_with_shipping_cost,
-                'cart':cart
+                'cart':cart_len
             }
             return render(request, 'core/product_cart.html', context)
         else:
@@ -316,13 +317,16 @@ class PaymentDone(LoginRequiredMixin,View):
         for item in product_cart:
             Order(user=user, customer_loc=customer_loc, product=item.product, quantity=item.quantity).save()
             item.delete()
+        messages.success(request,'Your order has been placed!')
         return redirect('order')
     
 class OrderPlaced(LoginRequiredMixin,View):
     login_url = reverse_lazy('user_login')
     def get(self, request, *args, **kwargs):
+        order_prod = Order.objects.filter(user=self.request.user)
         cart = len(ProductCart.objects.filter(user=self.request.user))
         context = {
+            'order_prod':order_prod,
             'cart':cart
         }
         return render(request, 'core/order.html', context)

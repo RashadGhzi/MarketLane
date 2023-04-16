@@ -149,6 +149,7 @@ class Order(models.Model):
     STATUS_CHOICES = (
         ('Accepted', 'Accepted'), ('Packed', 'Packed'), ('Shipped', 'Shipped'), ('Delivered', 'Delivered'), ('Cancelled', 'Cancelled')
     )
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     customer_loc = models.ForeignKey(CustomerAddress, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -156,5 +157,5 @@ class Order(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(choices=STATUS_CHOICES, max_length=50, default='Pending')
 
-    def get_total_price():
-        return Product.selling_price * Order.quantity
+    def get_total_price(self):
+        return self.product.selling_price * self.quantity

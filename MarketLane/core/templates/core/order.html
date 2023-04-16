@@ -1,11 +1,93 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% block title %}Catergory{% endblock title %}
-{% block category-view-css %}
-    <link rel="stylesheet" href="{% static 'core/css/category_view_style.css' %}">
-{% endblock category-view-css %}
-{% block navbar %}
-    <div>
-        {% include "core/navbar.html" %}
+
+{% block body-content %}
+    <div class="container mt-5 d-flex flex-column align-items-center fm-puff">
+      <div class="order-banner">
+          <div class="order-banner-header">
+            <h2>Thank you for shopping with us. Your order will be processed and shipped shortly</h2>
+          </div>
+        </div>
+        <div class="mt-4 mb-5">
+          {% for order_prod in order_prod %}
+            <div class="product-cart-banner product-order">
+              <a class="product-image-cart text-decoration-none" href="">
+                <img src="{{order_prod.product.product_image.url}}" alt="Product Image">
+              </a>
+              <div class="product-in">
+                <h2>{{order_prod.product.title}}</h2>
+                <p class="price">${{order_prod.get_total_price}}</p>
+              </div>
+              {% if order_prod.status == 'Pending' %}
+              <div class="order-status">
+                <p class="fw-bold">Order Processing</p>
+              </div>
+              {% elif order_prod.status == 'Accepted' %}
+              <div class="order-status">
+                <p class="fw-bold">{{order_prod.status}}</p>
+                <div>
+                  <div class="progress-stacked prog">
+                    <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% elif order_prod.status == 'Packed' %}
+              <div class="order-status">
+                <p class="fw-bold">{{order_prod.status}}</p>
+                <div>
+                  <div class="progress-stacked prog">
+                    <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar bg-success"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% elif order_prod.status == 'Shipped' %}
+              <div class="order-status">
+                <p class="fw-bold">{{order_prod.status}}</p>
+                <div>
+                  <div class="progress-stacked prog">
+                    <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar bg-success"></div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar bg-info"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% elif order_prod.status == 'Delivered' %}
+              <div class="order-status">
+                <p class="fw-bold">{{order_prod.status}}</p>
+                <div>
+                  <div class="progress-stacked prog">
+                    <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar bg-success"></div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar bg-info"></div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Segment four" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                      <div class="progress-bar bg-warning"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          {% endfor %} 
+        </div> 
     </div>
-{% endblock navbar %}
+{% endblock body-content %}

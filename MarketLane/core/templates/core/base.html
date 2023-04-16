@@ -16,16 +16,35 @@
     {% block women-page-css %}{% endblock women-page-css %}
     {% block product-view-css %}{% endblock product-view-css %}
     {% block css-link %}{% endblock css-link %}   
-    {% block responsive-css %}{% endblock responsive-css %}
     
     <!--Registration css link-->
     {% block registration-css %}{% endblock registration-css %}
+    <!--Css for responsive design-->
+    {% block responsive-css %}
+        <link rel="stylesheet" href="{% static 'core/css/responsive.css' %}">
+    {% endblock responsive-css %}
     <!-- This font awesome cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
-<body class="bg-white">
-    {% block navbar %}{% endblock navbar %}
+<body class="bg-light">
+    <div class="d-flex justify-content-center align-items-center w-100 message-style">
+        {% include "core/message.html" %}
+    </div>
+
+    <!--navbar-->
+    {% block navbar %}
+    <div class="d-none d-lg-block">
+        {% include "core/navbar.html" %}
+    </div>
+    {% endblock navbar %}
+
+    <!--Drawer -->
+    {% block drawer %}
+    <div class="d-block d-lg-none">
+        {% include "core/drawer.html" %}
+    </div>
+    {% endblock drawer %}
     {% block body-content %}{% endblock body-content %}
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

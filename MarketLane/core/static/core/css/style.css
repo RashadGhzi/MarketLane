@@ -2,6 +2,10 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Dancing+Script:wght@500&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff&display=swap');
+
+
+
 
 
 
@@ -12,11 +16,31 @@
     /* font-family: 'Poppins', sans-serif; */
 }
 
+body {
+    background-color: rgb(239 238 238) !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.fm-puff {
+    font-family: 'DynaPuff', cursive;
+}
+
 /* font family dance Script  */
 .font-dance {
     font-family: 'Dancing Script', cursive;
 }
 
+/* for message */
+.message-show {
+    position: absolute;
+    top: 4.5em;
+    width: 90vw;
+    margin: 0 3.5em;
+}
 
 /* navbar style  */
 .nav {
@@ -180,16 +204,16 @@ button[type="submit"] i {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 255px;
-    height: 430px;
+    width: 230px;
+    height: 380px;
     border: 1px solid #e6e6e6;
     border-radius: 5px;
     overflow: hidden;
-    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.2);
-    margin: 1.1em;
-    transition: all .1s;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 0.6em;
     text-decoration: none;
     color: black;
+    background-color: white !important;
 }
 
 .product-card-new:hover {
@@ -223,7 +247,7 @@ button[type="submit"] i {
 }
 
 .product-info {
-    padding: 20px;
+    padding: 12px;
     height: 40%;
     display: flex;
     flex-direction: column;
@@ -232,7 +256,7 @@ button[type="submit"] i {
 
 .product-title {
     margin: 0;
-    font-size: 1em;
+    font-size: .9em;
     font-weight: bold;
 }
 
@@ -243,20 +267,20 @@ button[type="submit"] i {
 
 .product-price {
     margin: 0;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 .product-button {
     display: block;
     margin-top: 7px;
-    padding: 10px 20px;
+    padding: 7px 20px;
     background-color: #0e1e2f;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 15px;
     text-transform: uppercase;
 }
 
@@ -328,15 +352,16 @@ button[type="submit"] i {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 265px;
-    height: 430px;
+    width: 230px;
+    height: 380px;
     border: 1px solid #e6e6e6;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    margin: 1em;
+    margin: 0.6em;
     text-decoration: none;
     color: black;
+    background-color: white !important;
 }
 
 
@@ -362,7 +387,7 @@ button[type="submit"] i {
     border: none;
     border-radius: 5px;
     padding: 10px;
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
     display: inline-block;
     width: 3em;
@@ -789,4 +814,58 @@ hr {
     background-color: #e6e6e6;
     border-color: #e6e6e6;
     color: #ffffff;
+}
+
+
+/* order page sytle  */
+.order-banner {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 6em;
+    width: 90vw;
+}
+
+.order-banner h2 {
+    margin-top: 0;
+    font-size: 1em;
+}
+
+.product-order {
+    width: 65vw;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.product-order .product-image-cart {
+    width: 65px;
+    height: 65px;
+}
+
+.order-status {
+    width: 20vw !important;
+    margin-left: auto !important;
+}
+
+.order-status p {
+    font-size: 12px;
+}
+
+.order-status .prog {
+    height: 10px !important;
+}
+
+.product-order .product-in h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    width: 30em;
+}
+
+.product-order .price {
+    font-size: 15px;
 }

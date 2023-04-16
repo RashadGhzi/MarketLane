@@ -4,11 +4,7 @@
 {% block css-link %}
   <link rel="stylesheet" href="{% static 'core/css/check_out.css' %}">
 {% endblock css-link %}
-{% block navbar %}
-<div>
-  {% include "core/navbar.html" %}
-</div>
-{% endblock navbar %}
+
 {% block body-content %}
   <div class='bg'>
     <div class="container col-lg-10 col-md-12 mt-md-5 pb-5">
@@ -80,5 +76,7 @@
     </div>
   </div>
 {% endblock body-content %}
-
+{% block ajax %}
+<script src="{% static 'core/js/main.js' %}"></script>
+{% endblock ajax %}
 {% block payment-gateway %}{% endblock payment-gateway %}
