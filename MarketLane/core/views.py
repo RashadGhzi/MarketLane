@@ -54,6 +54,7 @@ class MenItemsView(ListView):
 class ProductView(View):
     def get(self, request, id, *args, **kwargs):
         product_obj = Product.objects.get(id=id)
+        cart = 0
         if self.request.user.is_authenticated:
             cart = len(ProductCart.objects.filter(user=self.request.user))
         context = {
@@ -147,6 +148,8 @@ class CustomerAddressLoc(LoginRequiredMixin,FormView, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["cus_loc_objects"] = CustomerAddress.objects.filter(customer=self.request.user).order_by('-id')
+        if self.request.user.is_authenticated:
+            context["cart"] = len(ProductCart.objects.filter(user=self.request.user))
         return context
 
 class CustomerAddressDel(View):
@@ -186,7 +189,10 @@ class ProductCartView(LoginRequiredMixin,View):
             }
             return render(request, 'core/product_cart.html', context)
         else:
-            return render(request, 'core/no_cart.html')
+            context = {
+                'cart':cart_len
+            }
+            return render(request, 'core/no_cart.html', context)
 
 # adding product to ProductCart model database using ajax 
 class AddProductCart(LoginRequiredMixin,View):
@@ -305,6 +311,34 @@ class CheckoutView(LoginRequiredMixin,View):
         }
         return render(request, 'core/check_out.html', context)
     
+class ProductViewCheck(LoginRequiredMixin, View):
+    login_url = reverse_lazy('user_login')
+    def get(self, request, id, *args, **kwargs):
+        cart = len(ProductCart.objects.filter(user=self.request.user))
+        # print(id)
+        prod_obj = Product.objects.get(id=id)
+        address = CustomerAddress.objects.all()
+        products_price_with_shipping_price = prod_obj.selling_price + 70
+        context = {
+            'cart':cart,
+            'prod_obj':prod_obj,
+            'address':address,
+            'products_price_with_shipping_price':products_price_with_shipping_price,
+        }
+        return render(request, 'core/prod_view_check.html', context)
+
+class ProductViewCheckDone(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        item = self.request.GET
+        prod_id = item['prod_id']
+        add_id = item['add_id']
+        user = self.request.user
+        prod_obj = Product.objects.get(id=prod_id)
+        add_obj = CustomerAddress.objects.get(id=add_id)
+
+        Order(user=user, customer_loc=add_obj, product=prod_obj).save()
+        return redirect('order')
+
 
 class PaymentDone(LoginRequiredMixin,View):
     login_url = reverse_lazy('user_login')
@@ -325,8 +359,12 @@ class OrderPlaced(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
         order_prod = Order.objects.filter(user=self.request.user)
         cart = len(ProductCart.objects.filter(user=self.request.user))
-        context = {
+        if order_prod:
+            context = {
             'order_prod':order_prod,
             'cart':cart
-        }
-        return render(request, 'core/order.html', context)
+            }
+            return render(request, 'core/order.html', context)
+    
+        else:
+            return render(request, 'core/no_order.html',{'cart':cart})

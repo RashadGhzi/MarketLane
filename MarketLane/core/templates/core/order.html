@@ -12,7 +12,7 @@
         <div class="mt-4 mb-5">
           {% for order_prod in order_prod %}
             <div class="product-cart-banner product-order">
-              <a class="product-image-cart text-decoration-none" href="">
+              <a class="product-image-cart text-decoration-none" href="{% url 'product_view' order_prod.product.id %}">
                 <img src="{{order_prod.product.product_image.url}}" alt="Product Image">
               </a>
               <div class="product-in">

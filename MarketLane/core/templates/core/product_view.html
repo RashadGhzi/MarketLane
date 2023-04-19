@@ -19,7 +19,7 @@
       <form action="">
         <input type="hidden" name="prod_id" value="{{product_obj.id}}">
         <button type="button" class="add-to-cart" id="prod-view-cart" >Add to Cart</button>
-        <button type="submit" class="buy-now-btn mx-2">Buy Now</button>
+        <a href="{% url 'prod_view_checkout' product_obj.id %}" class="buy-now-btn mx-2 text-decoration-none">Buy Now</a>
       </form>      
     </div>
 </div>

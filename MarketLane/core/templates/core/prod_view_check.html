@@ -3,44 +3,39 @@
 {% block title %}Catergory{% endblock title %}
 {% block css-link %}
   <link rel="stylesheet" href="{% static 'core/css/check_out.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/product_view_style.css' %}">
 {% endblock css-link %}
+
 
 {% block body-content %}
   <div class='bg'>
     <div class="container col-lg-10 col-md-12 mt-md-5 pb-5">
       <div class="row">
         <div class="col-lg-6 col-md-7 d-flex flex-column align-items-center pt-5 bg-white rounded-3 mt-5">
-          {% for cart in carts %}
-            <div class="product-checkout-banner ">
-              <div class="product-image">
-                <img src="{{cart.product.product_image.url}}" alt="Product Image">
-              </div>
-              <div class="product-in">
-                <div class="d-flex align-items-baseline">
-                  <div class="mx-md-5 mx-3">
-                    <h2 class="fm-puff">Quantity</h2>
-                    <p class="price">{{cart.quantity}} X {{cart.product.selling_price}}</p>
-                  </div>
-                  <div class="mx-md-5 mx-3">
-                    <h2 class="fm-puff">Price</h2>
-                    <p class="price">${{cart.get_total_cost}}</p>
-                  </div>
+            <div class="prod-view-check">
+                <div class="prod-view-check-img">
+                    <img src="{{prod_obj.product_image.url}}" alt="Product Image">
                 </div>
-              </div>
+                <div class="prod-view-check-info text-danger">
+                  <h5 class="fw-bold text-dark fm-puff">Product title : </h5>
+                    <h5 class="prod-view-check-price fm-puff">
+                        {{prod_obj.title}}
+                    </h5>
+                </div>
             </div>
-          {% endfor %}
         </div>
           <div class="col-md-5 ms-lg-5 mt-5">
             <h6 class="rounded-2 bg-white py-2 px-4 fw-bold fm-puff ">Payment Methods</h6>
             <h6 class="rounded-2 bg-white py-4 px-4 fw-bold fm-puff mb-4">PayPal</h6>
             <h6 class="rounded-2 bg-white py-2 px-4 fw-bold fm-puff ">Amount</h6>
             <h6 class="rounded-2 bg-white py-4 px-4 fw-bold fm-puff mb-4 d-flex flex-column">
-              <p>Total Amount&nbsp : &nbsp$&nbsp<span class="text-danger">{{products_total_price}}</span> </p>
-              <p>Total Amount with Shipping $70 &nbsp:&nbsp $&nbsp<span class="text-danger">{{products_total_price_with_shipping_price}}</span> </p>
+              <p>Total Amount&nbsp : &nbsp$&nbsp<span class="text-danger">{{prod_obj.selling_price}}</span> </p>
+              <p>Total Amount with Shipping $70 &nbsp:&nbsp $&nbsp<span class="text-danger">{{products_price_with_shipping_price}}</span> </p>
             </h6>
             <h6 class="rounded-2 bg-white py-2 px-4 fw-bold fm-puff">Billing Address</h6>
-            <div class="rounded-2 bg-white py-2 px-4 fw-semibold add-form">
-              <form action="/payment/done">
+            <div class="rounded-2 bg-white py-2 px-4 fw-semibold">
+              <form action="/prod/view/checkout/done">
+                <input type="hidden" name="prod_id" value="{{prod_obj.id}}">
                 {% for address in address %}
                 <div class="billing-address fm-puff mb-3">
                   <h5 class="text-info">{{address.name|capfirst}}</h5>
@@ -66,7 +61,7 @@
                 </div>
                 {% endfor %}
                 <a href="{% url 'customer_address' %}" class="btn btn-info py-2 my-3 d-block fw-bold">add address</a>
-                <button type="submit" class="btn btn-warning py-3 my-3 d-block fw-bold fm-puff w-100">continue</button>
+                <button type="submit" class="btn btn-warning py-3 my-3 d-block fw-bold fm-puff w-100 ">continue</button>
                 <!--Paymen banner-->
               </form>
             </div>

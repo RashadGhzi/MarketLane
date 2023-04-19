@@ -118,7 +118,7 @@ input[type="number"] {
     border-bottom-right-radius: 4px;
 }
 
-button[type="submit"] {
+.add-form button[type="submit"] {
     border: 1px solid #202020 !important;
     background: none;
     outline: none;
@@ -155,4 +155,27 @@ button[type="submit"] {
 .buy-now-btn:hover {
     background-color: #555 !important;
     color: white;
+}
+
+
+
+/* prod_view_check.html page style */
+.prod-view-check {
+    width: 100%;
+}
+
+.prod-view-check-img {
+    display: flex;
+    justify-content: center;
+}
+
+
+.prod-view-check-img img {
+    height: auto;
+    width: 90%;
+}
+
+.prod-view-check-info {
+    padding: 0 3em !important;
+    margin: 2em 0;
 }

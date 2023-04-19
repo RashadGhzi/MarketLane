@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}
+    Product View
+{% endblock title %}
+{% block body-content %}
+<div class="cart-banner">
+    <div class="logo">
+      <img src="{% static 'core/images/order.png' %}" alt="Logo">
+    </div>
+    <div class="message">
+      <p>You have no orders yet</p>
+    </div>
+</div>
+{% endblock body-content %}

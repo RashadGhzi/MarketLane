@@ -2,7 +2,7 @@
 
     // This is for gents product category show
     $('#gents_prod').click(function(){
-        //console.log('clicked');
+        console.log('clicked');
         $.ajax({
             url:"{% url 'category_product_men' %}",
             method:'GET',

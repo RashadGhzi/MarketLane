@@ -27,10 +27,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
-<body class="bg-light">
+<body class="bg-light mb-5">
+    {% block message %}
     <div class="d-flex justify-content-center align-items-center w-100 message-style">
         {% include "core/message.html" %}
     </div>
+    {% endblock message %}
 
     <!--navbar-->
     {% block navbar %}

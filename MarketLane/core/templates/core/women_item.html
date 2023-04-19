@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}women products{% endblock title %}
 {% block women-page-css %}
-    <link rel="stylesheet" href="{% static 'core/css/women_page_style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/men_page_style.css' %}">
 {% endblock women-page-css %}
 
 {% block body-content %}
@@ -17,11 +17,11 @@
     </div>
   </section>
   
-  <section class="women-section-2">
+  <section class="men-section-2">
     <div class="row justify-content-center">
       {% for women_product in women_products %}
-      <div class="d-flex flex-column align-items-center women-product">
-        <div class="women-product-card">
+      <div class="d-flex flex-column align-items-center men-product">
+        <div class="men-product-card">
           <div class="product-card-image">
             <img src="{{women_product.product_image.url}}" alt="{{women_product.title}}">
             <div class="product-card-hover">
@@ -38,8 +38,8 @@
               <i class="fa fa-star"></i>
               <i class="far fa-star"></i>
             </div>
-            <button class="product-card-btn" data-id="{{women_product.id}}">Add to Cart</button>
-            <a href="{% url 'product_cart' %}" data-id='{{women_product.id}}' class="product-card-btn text-decoration-none d-none">show cart</a>
+            <button class="product-card-btn" data-id='{{women_product.id}}'>Add to Cart</button>
+            <!-- <a href="{% url 'product_cart' %}" data-id='{{women_product.id}}' class="product-card-btn text-decoration-none d-none">show cart</a> -->
           </div>
         </div> 
       </div> 
@@ -47,7 +47,7 @@
     </div>             
   </section>
 {% endblock body-content %}
-
+ 
 <!-- using ajax to adding product to cart -->
 {% block ajax %}
   {% include "core/ajax/ajax_cart.html" %}

@@ -85,6 +85,59 @@
         width: 2.7em;
     }
 
+
+    /* men category page main banner style  */
+
+    .men-product .product-card-hover a {
+        font-size: 14px;
+    }
+
+    .banner-text h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .banner-text p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+
+    .men-product {
+        width: 170px;
+        height: 282px;
+        margin: 0.3em;
+    }
+
+    .product-card-details h4 {
+        font-size: .7em;
+    }
+
+    .product-card-details {
+        padding: 7px;
+        text-align: center;
+    }
+
+    .product-card-price {
+        font-size: .8em;
+    }
+
+    .men-product .product-card-rating {
+        margin-bottom: 0px;
+    }
+
+    .product-card-btn {
+        padding: 3px 20px;
+        margin-top: 8px;
+        font-size: 8px;
+    }
+
+
+
+    .men-product .fa-star:before {
+        font-size: 9px;
+    }
+
 }
 
 
@@ -223,6 +276,72 @@
 
     .product-card-rating {
         margin-bottom: 5px;
+    }
+
+
+    /* men category page responsive style  */
+
+    .banner-text a {
+        transition: all 0.3s ease-in-out;
+        font-size: 11px;
+    }
+
+    .men-product {
+        width: 170px;
+        height: 270px;
+        margin: 0.3em;
+    }
+
+    .product-card-details h4 {
+        font-size: .7em;
+    }
+
+    .product-card-price {
+        font-size: .8em;
+    }
+
+    .men-product .fa-star:before {
+        font-size: 9px;
+    }
+
+    .product-card-btn {
+        padding: 3px 20px;
+        margin-top: 5px;
+        font-size: 8px;
+    }
+
+
+    /* men product card responsive style  */
+
+    .men-product .product-card-hover a {
+        font-size: 12px;
+    }
+
+    .men-product .product-card-details h4 {
+        font-size: .5em;
+    }
+
+    .men-product .product-card-price {
+        font-size: .5em;
+    }
+
+    .men-product .product-card-btn {
+        font-size: 6px;
+    }
+
+
+    /* product view page responsive style  */
+    .product-container {
+        display: flex;
+        flex-direction: column;
+        margin: 0em;
+        margin-top: 4em;
+        padding-left: 1em;
+    }
+
+
+    .product-image img {
+        width: 50vw;
     }
 
 
@@ -388,6 +507,59 @@
     }
 
 
+    /* men product page responsive style  */
+
+    .men-product .product-card-hover a {
+        font-size: 10px;
+    }
+
+    .men-product {
+        width: 115px;
+        height: 185px;
+        margin: 0.1em;
+    }
+
+    .men-product .product-card-rating {
+        padding: 0;
+        margin: 0;
+    }
+
+    .men-product .product-card-rating i {
+        color: #ffd200;
+        font-size: 6px;
+        margin-right: 1px;
+    }
+
+    .men-product .fa-star:before {
+        font-size: 5px;
+    }
+
+    .men-product .product-card-btn {
+        font-size: 3.5px;
+        margin-top: 0 !important;
+    }
+
+    .men-product .product-card-details h4 {
+        font-size: .4em;
+    }
+
+    .men-product .product-card-price {
+        font-size: .4em;
+        margin: 2px 0;
+    }
+
+    .men-product .product-card-details {
+        padding: 3px;
+        text-align: center;
+    }
+
+
+    /* product view page responsive style  */
+    .product-image img {
+        width: 100%;
+        height: auto;
+    }
+
 }
 
 /* screen max width 376px  */
@@ -474,4 +646,54 @@
     .product-price {
         font-size: 8px;
     }
+
+
+    /* men page product responsive style  */
+
+    .banner-text h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .banner-text p {
+        font-size: .9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .banner-text a {
+        font-size: 9px;
+    }
+
+    .men-product .product-card-hover a {
+        font-size: 7px;
+    }
+
+    .men-product {
+        width: 113px;
+        height: 170px;
+        margin: 0.1em;
+    }
+
+    .men-product .product-card-price {
+        font-size: .3em;
+        margin: 1px 0;
+    }
+
+    .men-product .product-card-details h4 {
+        font-size: .3em;
+    }
+
+    .men-product .fa-star:before {
+        font-size: 4px;
+    }
+
+    .men-product .product-card-btn {
+        font-size: 3px;
+        margin-top: 0 !important;
+    }
+
+    .product-card-btn {
+        padding: 2px 13px;
+    }
+
 }

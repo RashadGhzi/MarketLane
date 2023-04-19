@@ -48,17 +48,17 @@
 }
 
 
-/* woment product page section 2 style  */
+/* Men product page section 2 style  */
 .men-section-2 {
     margin: 4em 2em;
 }
 
-/* women product card style  */
+/* Men product card style  */
 .men-product {
     position: relative;
-    width: 255px;
-    height: 440px;
-    margin: 1em;
+    width: 221px;
+    height: 371px;
+    margin: 0.6em;
 }
 
 
@@ -66,7 +66,7 @@
     display: flex;
     flex-direction: column;
     border: 1px solid #e6e6e6;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -134,12 +134,13 @@
 }
 
 .product-card-details h4 {
-    font-size: 18px;
-    margin: 0 0;
+    margin: 0;
+    font-size: .9em;
+    font-weight: bold;
 }
 
 .product-card-price {
-    font-size: 1.5em;
+    font-size: 1.2em;
     padding: 0;
     margin: 0;
     font-weight: bold;
@@ -151,8 +152,8 @@
 
 .product-card-rating i {
     color: #ffd200;
-    font-size: 18px;
-    margin-right: 5px;
+    font-size: 15px;
+    margin-right: 4px;
 }
 
 .product-card-btn {
@@ -161,8 +162,9 @@
     color: #fff;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 5px 20px;
     border-radius: 5px;
     margin-top: 10px;
     border: none;
+    font-size: 12px;
 }
