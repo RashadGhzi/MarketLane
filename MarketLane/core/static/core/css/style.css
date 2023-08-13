@@ -478,19 +478,10 @@ button[type="submit"] i {
     width: 30em;
     padding: 3em;
     border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
 }
 
-.form-address input[type="submit"] {
-    width: 100% !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    letter-spacing: 3px ;
-    font-weight: bold;
-    color: white;
-}
 
 .location-field {
     position: relative;
@@ -518,14 +509,18 @@ button[type="submit"] i {
 .location-field input:focus {
     border: none;
     outline: none;
-    border-bottom: 2px solid #ffc107;
+    border-bottom: 2px solid black;
 }
 
 .location-form input[type='submit'] {
-    width: 7em;
-    height: 2.3em;
+    width: 100% !important;
+    height: 2.7em;
     border: none;
-    color: white;
+    color: black;
+    background-color: #ffc107 !important;
+    font-family: cursive;
+    font-weight: bold;
+    letter-spacing: 2px;
     border-radius: 7px;
 }
 
