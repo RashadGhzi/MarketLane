@@ -7,8 +7,7 @@
     <div class="d-flex flex-column align-items-center mt-5">
         <div class="container row my-5">
             <div class="col-5 position-relative location-form">
-                <h2 class="address-heading">Enter Your Address</h2>
-                <form action="" method="post">
+                <form action="" method="post" class="form-address">
                     {% csrf_token %}
                     {% for form in form %}
                     <div class="location-field">
@@ -20,7 +19,7 @@
                 </form>
             </div>
             <div class="col-6 offset-1">
-                <h2 class="address-heading">Shipping Address</h2>
+                {% comment %} <h2 class="address-heading">Shipping Address</h2> {% endcomment %}
                 {% for cus_loc_object in cus_loc_objects %}
                 <div class="address-container">
                     <div class="address-details">

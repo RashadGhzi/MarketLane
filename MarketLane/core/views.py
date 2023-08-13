@@ -154,7 +154,7 @@ class CustomerAddressLoc(LoginRequiredMixin,FormView, ListView):
 
 class CustomerAddressDel(View):
     def dispatch(self, request, id, *args, **kwargs):
-        cus_add = CustomerAddress.objects.filter(id=id)
+        cus_add = CustomerAddress.objects.get(pk=id)
         cus_add.delete()   
         return redirect('customer_address')
     

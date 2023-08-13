@@ -469,9 +469,34 @@ button[type="submit"] i {
 }
 
 /* location form styling  */
+.form-address {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30em;
+    padding: 3em;
+    border-radius: 10px;
+
+}
+
+.form-address input[type="submit"] {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 3px ;
+    font-weight: bold;
+    color: white;
+}
+
 .location-field {
     position: relative;
     margin: 1em 0;
+    /* border: 2px solid green !important; */
+    width: 22em !important;
 }
 
 .location-field label {
@@ -485,12 +510,15 @@ button[type="submit"] i {
     display: block;
     border: none;
     border-bottom: 2px solid #ffc107;
+    background: none;
+    width: 100% !important;
 }
+
 
 .location-field input:focus {
     border: none;
     outline: none;
-    border: 2px solid #ffc107;
+    border-bottom: 2px solid #ffc107;
 }
 
 .location-form input[type='submit'] {
@@ -510,14 +538,6 @@ button[type="submit"] i {
     box-shadow: 0px 0px 4px #ccc;
     margin: 20px;
     padding: 20px;
-}
-
-.address-heading {
-    color: #333;
-    font-size: 24px;
-    margin: 0;
-    padding-bottom: 10px;
-    text-align: center;
 }
 
 .address-details p {
