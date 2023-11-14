@@ -28,7 +28,7 @@ class Product(models.Model):
 class CustomerAddress(models.Model):
     STATE_CHOICES = [
         ('Rajshahi', (
-                ('Bogra', 'Bogra'),
+                ('Bogura', 'Bogura'),
                 ('Joypurhat', 'Joypurhat'),
                 ('Naogaon', 'Naogaon'),
                 ('Natore', 'Natore'),('Chapainawabganj', 'Chapainawabganj'),

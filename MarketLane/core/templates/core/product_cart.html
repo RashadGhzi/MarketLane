@@ -10,7 +10,7 @@
 {% block body-content %}
 <div class="cart-view">
     <div class="row justify-content-center my-5 ">
-        <div class="col-lg-6 col-md-8 col-12 mt-4">
+        <div class="col-lg-6 col-md-8 col-12">
           {% for cart_product in cart_products %}
             <div class="product-cart-banner">
               <a class="product-image-cart text-decoration-none" href="{% url 'product_view' cart_product.product.id %}">

@@ -11,7 +11,7 @@ from django.contrib import messages
 # Create your views here.
 
 
-# home page view 
+# home page view
 class HomeView(ListView):
     template_name = 'core/home.html'
     queryset = Product.objects.all()
@@ -19,38 +19,52 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["products_cloth"] = Product.objects.filter(category='CL').order_by('id')[:10]
-        context["products_shoes"] = Product.objects.filter(category='SH').order_by('id')[:10]
-        context["products_sunglass"] = Product.objects.filter(category='SG').order_by('id')[:10]
+        context["products_cloth"] = Product.objects.filter(
+            category='CL').order_by('id')[:10]
+        context["products_shoes"] = Product.objects.filter(
+            category='SH').order_by('id')[:10]
+        context["products_sunglass"] = Product.objects.filter(
+            category='SG').order_by('id')[:10]
         if self.request.user.is_authenticated:
-            context["cart"] = len(ProductCart.objects.filter(user=self.request.user))
+            context["cart"] = len(
+                ProductCart.objects.filter(user=self.request.user))
         return context
 
-# women item page view 
+# women item page view
+
+
 class WomenItemsView(ListView):
     template_name = 'core/women_item.html'
     model = Product
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["women_products"] = Product.objects.filter(gender='F').order_by('?')
+        context["women_products"] = Product.objects.filter(
+            gender='F').order_by('?')
         if self.request.user.is_authenticated:
-            context["cart"] = len(ProductCart.objects.filter(user=self.request.user))
+            context["cart"] = len(
+                ProductCart.objects.filter(user=self.request.user))
         return context
 
-# men item page view 
+# men item page view
+
+
 class MenItemsView(ListView):
     template_name = 'core/men_item.html'
     model = Product
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["men_products"] = Product.objects.filter(gender='M').order_by('?')
+        context["men_products"] = Product.objects.filter(
+            gender='M').order_by('?')
         if self.request.user.is_authenticated:
-            context["cart"] = len(ProductCart.objects.filter(user=self.request.user))
+            context["cart"] = len(
+                ProductCart.objects.filter(user=self.request.user))
         return context
 
-# Single product item view page 
+# Single product item view page
+
+
 class ProductView(View):
     def get(self, request, id, *args, **kwargs):
         product_obj = Product.objects.get(id=id)
@@ -58,43 +72,49 @@ class ProductView(View):
         if self.request.user.is_authenticated:
             cart = len(ProductCart.objects.filter(user=self.request.user))
         context = {
-            "product_obj":product_obj,
-            'cart':cart,
+            "product_obj": product_obj,
+            'cart': cart,
         }
         return render(request, 'core/product_view.html', context)
 
+
 my_dict = {}
+
+
 class CatergoryView(View):
     def get(self, request, data, *args, **kwargs):
-        
+
         if data == 'cloth':
             prod_obj = Product.objects.filter(category='CL')
-            my_dict['pro_cat']='CL'
+            my_dict['pro_cat'] = 'CL'
         elif data == 'shoes':
             prod_obj = Product.objects.filter(category='SH')
-            my_dict['pro_cat']='SH'
-        elif data == 'sunglass': 
+            my_dict['pro_cat'] = 'SH'
+        elif data == 'sunglass':
             prod_obj = Product.objects.filter(category='SG')
-            my_dict['pro_cat']='SG'
+            my_dict['pro_cat'] = 'SG'
 
         cart = 0
         if self.request.user.is_authenticated:
             cart = len(ProductCart.objects.filter(user=self.request.user))
         context = {
-            'data':prod_obj,
-            'cart':cart
+            'data': prod_obj,
+            'cart': cart
         }
         return render(request, 'core/category_view.html', context)
+
 
 class CategoryMenAjax(View):
     def get(self, request, *args, **kwargs):
         image_url_list = []
         # print(my_dict)
         prod_cat = my_dict['pro_cat']
-        cat_gen_prod = Product.objects.filter(category=prod_cat).filter(gender='M').values()
+        cat_gen_prod = Product.objects.filter(
+            category=prod_cat).filter(gender='M').values()
         list_prod = list(cat_gen_prod)
 
-        obj_list = Product.objects.filter(category=prod_cat).filter(gender='M').values('id')
+        obj_list = Product.objects.filter(
+            category=prod_cat).filter(gender='M').values('id')
         # print(obj_list)
         for i in obj_list:
             id = i['id']
@@ -102,23 +122,24 @@ class CategoryMenAjax(View):
             img_path = id_obj.product_image.url
             # print(img_path)
             image_url_list.append(img_path)
-        
+
         # print(image_url_list)
 
-
-        context = {'cat_gen_prod':list_prod, 'image_url_list':image_url_list}
+        context = {'cat_gen_prod': list_prod, 'image_url_list': image_url_list}
         return JsonResponse(context)
-    
+
 
 class CategoryWomenAjax(View):
     def get(self, request, *args, **kwargs):
         image_url_list = []
         # print(my_dict)
         prod_cat = my_dict['pro_cat']
-        cat_gen_prod = Product.objects.filter(category=prod_cat).filter(gender='F').values()
+        cat_gen_prod = Product.objects.filter(
+            category=prod_cat).filter(gender='F').values()
         list_prod = list(cat_gen_prod)
 
-        obj_list = Product.objects.filter(category=prod_cat).filter(gender='F').values('id')
+        obj_list = Product.objects.filter(
+            category=prod_cat).filter(gender='F').values('id')
         # print(obj_list)
         for i in obj_list:
             id = i['id']
@@ -126,20 +147,20 @@ class CategoryWomenAjax(View):
             img_path = id_obj.product_image.url
             # print(img_path)
             image_url_list.append(img_path)
-        
-        # print(image_url_list)
-        context = {'cat_gen_prod':list_prod, 'image_url_list':image_url_list}
-        return JsonResponse(context)
-    
 
-class CustomerAddressLoc(LoginRequiredMixin,FormView, ListView):
+        # print(image_url_list)
+        context = {'cat_gen_prod': list_prod, 'image_url_list': image_url_list}
+        return JsonResponse(context)
+
+
+class CustomerAddressLoc(LoginRequiredMixin, FormView, ListView):
     login_url = reverse_lazy('user_login')
     form_class = CustomerAddressForm
     template_name = 'core/customer_profile.html'
     model = CustomerAddress
     success_url = reverse_lazy('customer_address')
 
-    def form_valid(self, form) :
+    def form_valid(self, form):
         customer_name = self.request.user
         form.instance.customer = customer_name
         form.save()
@@ -147,17 +168,19 @@ class CustomerAddressLoc(LoginRequiredMixin,FormView, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["cus_loc_objects"] = CustomerAddress.objects.filter(customer=self.request.user).order_by('-id')
+        context["cus_loc_objects"] = CustomerAddress.objects.filter(
+            customer=self.request.user).order_by('-id')
         if self.request.user.is_authenticated:
-            context["cart"] = len(ProductCart.objects.filter(user=self.request.user))
+            context["cart"] = len(
+                ProductCart.objects.filter(user=self.request.user))
         return context
+
 
 class CustomerAddressDel(View):
     def dispatch(self, request, id, *args, **kwargs):
         cus_add = CustomerAddress.objects.get(pk=id)
-        cus_add.delete()   
+        cus_add.delete()
         return redirect('customer_address')
-    
 
 
 # other time not important
@@ -169,12 +192,14 @@ class CustomerAddressDel(View):
 #         # print(address_form)
 #         return JsonResponse({'data':cus_data})
 
-# showing added product cart 
-class ProductCartView(LoginRequiredMixin,View):
+# showing added product cart
+class ProductCartView(LoginRequiredMixin, View):
     login_url = reverse_lazy('user_login')
+
     def get(self, request, *args, **kwargs):
         cart_len = len(ProductCart.objects.filter(user=self.request.user))
-        cart_products = ProductCart.objects.filter(user=request.user).order_by('-id')
+        cart_products = ProductCart.objects.filter(
+            user=request.user).order_by('-id')
         products_total_price = 0.0
 
         if cart_products:
@@ -182,23 +207,25 @@ class ProductCartView(LoginRequiredMixin,View):
                 products_total_price += cart.get_total_cost()
             products_total_price_with_shipping_cost = products_total_price + 70
             context = {
-                'cart_products':cart_products,
-                'products_total_price':products_total_price,
-                'products_total_price_with_shipping_cost':products_total_price_with_shipping_cost,
-                'cart':cart_len
+                'cart_products': cart_products,
+                'products_total_price': products_total_price,
+                'products_total_price_with_shipping_cost': products_total_price_with_shipping_cost,
+                'cart': cart_len
             }
             return render(request, 'core/product_cart.html', context)
         else:
             context = {
-                'cart':cart_len
+                'cart': cart_len
             }
             return render(request, 'core/no_cart.html', context)
 
-# adding product to ProductCart model database using ajax 
-class AddProductCart(LoginRequiredMixin,View):
+# adding product to ProductCart model database using ajax
+
+
+class AddProductCart(LoginRequiredMixin, View):
     login_url = reverse_lazy('user_login')
+
     def get(self, request, *args, **kwargs):
-        
 
         user = self.request.user
         # print(user)
@@ -206,7 +233,8 @@ class AddProductCart(LoginRequiredMixin,View):
         # print(prod_id)
         prod_obj = Product.objects.get(id=prod_id)
         prod_exist = False
-        prod_exist = ProductCart.objects.filter(Q(product=prod_obj)&Q(user=user)).exists()
+        prod_exist = ProductCart.objects.filter(
+            Q(product=prod_obj) & Q(user=user)).exists()
 
         # if product already in cart then it will increase ProductCart quantity
         if prod_exist == True:
@@ -214,31 +242,36 @@ class AddProductCart(LoginRequiredMixin,View):
             # print(item)
             item.quantity += 1
             item.save()
-        
-        # else it will add product to Product Cart 
+
+        # else it will add product to Product Cart
         else:
             ProductCart(user=user, product=prod_obj).save()
 
         cart = len(ProductCart.objects.filter(user=self.request.user))
-        return JsonResponse({'response':True, 'cart':cart})
+        return JsonResponse({'response': True, 'cart': cart})
 
-class RemoveProductCart(LoginRequiredMixin,View):
+
+class RemoveProductCart(LoginRequiredMixin, View):
     login_url = reverse_lazy('user_login')
+
     def get(self, request, id, *args, **kwargs):
         cart_prod = ProductCart.objects.get(id=id)
         cart_prod.delete()
         return redirect('product_cart')
 
-# cart quantity increase function   
-class PlusProductCart(LoginRequiredMixin,View):
+# cart quantity increase function
+
+
+class PlusProductCart(LoginRequiredMixin, View):
     login_url = reverse_lazy('user_login')
+
     def get(self, request, *args, **kwargs):
-        
+
         cart_id = request.GET['cart_id']
         # print(cart_id)
         cart_obj = ProductCart.objects.get(id=cart_id)
 
-        # quantity update 
+        # quantity update
         cart_obj.quantity += 1
         cart_obj.save()
         obj_total_price = cart_obj.get_total_cost()
@@ -251,22 +284,25 @@ class PlusProductCart(LoginRequiredMixin,View):
 
         products_total_price_with_shipping_price = products_total_price + 70
         context = {
-            'cart_quantity':cart_obj.quantity,
-            'obj_total_price':obj_total_price,
-            'products_total_price':products_total_price,
-            'products_total_price_with_shipping_price':products_total_price_with_shipping_price,
+            'cart_quantity': cart_obj.quantity,
+            'obj_total_price': obj_total_price,
+            'products_total_price': products_total_price,
+            'products_total_price_with_shipping_price': products_total_price_with_shipping_price,
         }
         return JsonResponse(context)
-    
-# cart quantity decrease function   
-class MinusProductCart(LoginRequiredMixin,View):
+
+# cart quantity decrease function
+
+
+class MinusProductCart(LoginRequiredMixin, View):
     login_url = reverse_lazy('user_login')
+
     def get(self, request, *args, **kwargs):
         cart_id = request.GET['cart_id']
         # print(cart_id)
         cart_obj = ProductCart.objects.get(id=cart_id)
 
-        # quantity update 
+        # quantity update
         if cart_obj.quantity <= 1:
             cart_obj.quantity = 1
             cart_obj.save()
@@ -283,49 +319,55 @@ class MinusProductCart(LoginRequiredMixin,View):
 
         products_total_price_with_shipping_price = products_total_price + 70
         context = {
-            'cart_quantity':cart_obj.quantity,
-            'obj_total_price':obj_total_price,
-            'products_total_price':products_total_price,
-            'products_total_price_with_shipping_price':products_total_price_with_shipping_price,
+            'cart_quantity': cart_obj.quantity,
+            'obj_total_price': obj_total_price,
+            'products_total_price': products_total_price,
+            'products_total_price_with_shipping_price': products_total_price_with_shipping_price,
         }
         return JsonResponse(context)
 
 
-class CheckoutView(LoginRequiredMixin,View):
+class CheckoutView(LoginRequiredMixin, View):
     login_url = reverse_lazy('user_login')
+
     def get(self, request, *args, **kwargs):
         cart = len(ProductCart.objects.filter(user=self.request.user))
         carts = ProductCart.objects.filter(user=request.user).order_by('-id')
-        address = CustomerAddress.objects.filter(customer=request.user).order_by('-id')
+        address = CustomerAddress.objects.filter(
+            customer=request.user).order_by('-id')
         products_total_price = 0.0
         for obj in carts:
             products_total_price = products_total_price + obj.get_total_cost()
 
         products_total_price_with_shipping_price = products_total_price+70
         context = {
-            'carts':carts,
-            'address':address,
-            'products_total_price':products_total_price,
-            'products_total_price_with_shipping_price':products_total_price_with_shipping_price,
-            'cart':cart
+            'carts': carts,
+            'address': address,
+            'products_total_price': products_total_price,
+            'products_total_price_with_shipping_price': products_total_price_with_shipping_price,
+            'cart': cart
         }
         return render(request, 'core/check_out.html', context)
-    
+
+
 class ProductViewCheck(LoginRequiredMixin, View):
     login_url = reverse_lazy('user_login')
+
     def get(self, request, id, *args, **kwargs):
         cart = len(ProductCart.objects.filter(user=self.request.user))
         # print(id)
         prod_obj = Product.objects.get(id=id)
-        address = CustomerAddress.objects.all()
+        address = CustomerAddress.objects.filter(customer=request.user)
+        print("user", request.user)
         products_price_with_shipping_price = prod_obj.selling_price + 70
         context = {
-            'cart':cart,
-            'prod_obj':prod_obj,
-            'address':address,
-            'products_price_with_shipping_price':products_price_with_shipping_price,
+            'cart': cart,
+            'prod_obj': prod_obj,
+            'address': address,
+            'products_price_with_shipping_price': products_price_with_shipping_price,
         }
         return render(request, 'core/prod_view_check.html', context)
+
 
 class ProductViewCheckDone(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -340,8 +382,9 @@ class ProductViewCheckDone(LoginRequiredMixin, View):
         return redirect('order')
 
 
-class PaymentDone(LoginRequiredMixin,View):
+class PaymentDone(LoginRequiredMixin, View):
     login_url = reverse_lazy('user_login')
+
     def get(self, request, *args, **kwargs):
         add_id = self.request.GET.get('add_id')
         # print(add_id)
@@ -349,22 +392,25 @@ class PaymentDone(LoginRequiredMixin,View):
         product_cart = ProductCart.objects.filter(user=user)
         customer_loc = CustomerAddress.objects.get(id=add_id)
         for item in product_cart:
-            Order(user=user, customer_loc=customer_loc, product=item.product, quantity=item.quantity).save()
+            Order(user=user, customer_loc=customer_loc,
+                  product=item.product, quantity=item.quantity).save()
             item.delete()
-        messages.success(request,'Your order has been placed!')
+        messages.success(request, 'Your order has been placed!')
         return redirect('order')
-    
-class OrderPlaced(LoginRequiredMixin,View):
+
+
+class OrderPlaced(LoginRequiredMixin, View):
     login_url = reverse_lazy('user_login')
+
     def get(self, request, *args, **kwargs):
         order_prod = Order.objects.filter(user=self.request.user)
         cart = len(ProductCart.objects.filter(user=self.request.user))
         if order_prod:
             context = {
-            'order_prod':order_prod,
-            'cart':cart
+                'order_prod': order_prod,
+                'cart': cart
             }
             return render(request, 'core/order.html', context)
-    
+
         else:
-            return render(request, 'core/no_order.html',{'cart':cart})
+            return render(request, 'core/no_order.html', {'cart': cart})

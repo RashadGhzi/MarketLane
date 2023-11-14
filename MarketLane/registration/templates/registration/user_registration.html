@@ -9,9 +9,9 @@
 {% endblock responsive-css %}
 {% block message %}{% endblock message %}
 {% block body-content %}
-    <div class="d-flex flex-column justify-content-center align-items-center vh-100 vw-100 bg-img" style="background-image: url('{% static 'registration/images/tree.png' %}');">
+    <div class="d-flex flex-column justify-content-center align-items-center bg-img" style="background-image: url('{% static 'registration/images/tree.png' %}');">
         <div class="register-form bg-transparent d-flex flex-column justify-content-center align-items-center">
-            <form action="" method="post">
+            <form action="" method="post" class="form-reg">
                 {% csrf_token %}
                 {% for form in form %}
                 <div class="label-input d-flex flex-column justify-content-center align-items-center my-3">
@@ -19,14 +19,14 @@
                         {{form.label_tag}}
                         {{form}}
                     </div>
-                    <small class="d-block text-danger"> 
+                    <small class="d-block text-light"> 
                         {{form.errors|striptags}}
                     </small>
                 </div>
                 {% endfor %}
-                <input class="form-submit-btn my-3 fw-bold" type="submit" value="Register">
+                <input class="form-submit-btn my-3 fw-bold bg-light text-black" type="submit" value="Register">
             </form>
-            <div class="text-white">Already have an account? <a href="{% url 'user_login' %}" class="fw-bold text-decoration-none text-black">LogIn</a></div>           
+            <div class="text-white">Already have an account? <a href="{% url 'user_login' %}" class="fw-bold text-decoration-none text-white">LogIn</a></div>           
         </div>
     </div>
 {% endblock body-content %}

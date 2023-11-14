@@ -13,7 +13,7 @@
                 let cat_gen_html = '';
                 let img_url_list = response.image_url_list;
                 for(let i=0; i<prod_obj.length; i++){
-                    cat_gen_html += `<div class='product-card'><a href="product/view/${prod_obj[i].id}/" class="product-image"><img src="${img_url_list[i]}" alt=""></a><div class="product-info"><h3 class="product-title">${prod_obj[i].title.slice(0,35)}</h3><p class="product-price row align-items-center">$${prod_obj[i].selling_price}<button class="cart-btn-cat" data-id=${prod_obj[i].id}><i class="fas fa-shopping-cart"></i></button></p><div class="product-card-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></div></div></div>`;
+                    cat_gen_html += `<div class='product-card'><a href="product/view/${prod_obj[i].id}/" class="product-image"><img src="${img_url_list[i]}" alt=""></a><div class="product-info"><h3 class="product-title">${prod_obj[i].title.slice(0,35)}</h3><div class="product-card-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><p class="product-price row align-items-center">$${prod_obj[i].selling_price}<button class="cart-btn" data-id=${prod_obj[i].id}><i class="fas fa-shopping-cart"></i></button></p></div></div>`;
                 } 
                 $('#cat-gender-view').html(cat_gen_html);
             }
@@ -43,7 +43,7 @@
                 let cat_gen_html = '';
                 let img_url_list = response.image_url_list;
                 for(let i=0; i<prod_obj.length; i++){
-                    cat_gen_html += `<div class='product-card'><a href="product/view/${prod_obj[i].id}/" class="product-image"><img src="${img_url_list[i]}" alt=""></a><div class="product-info"><h3 class="product-title">${prod_obj[i].title.slice(0,35 )}</h3><p class="product-price row align-items-center">$${prod_obj[i].selling_price}<button class="cart-btn-cat" data-id=${prod_obj[i].id}><i class="fas fa-shopping-cart"></i></button></p><div class="product-card-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></div></div></div>`;
+                    cat_gen_html += `<div class='product-card'><a href="product/view/${prod_obj[i].id}/" class="product-image"><img src="${img_url_list[i]}" alt=""></a><div class="product-info"><h3 class="product-title">${prod_obj[i].title.slice(0,35 )}</h3><div class="product-card-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><p class="product-price row align-items-center">$${prod_obj[i].selling_price}<button class="cart-btn" data-id=${prod_obj[i].id}><i class="fas fa-shopping-cart"></i></button></p></div></div>`;
                 } 
                 $('#cat-gender-view').html(cat_gen_html);
             }

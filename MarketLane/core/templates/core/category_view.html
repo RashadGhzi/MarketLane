@@ -7,8 +7,8 @@
 {% block body-content %}
 <div class="d-flex flex-column align-items-center justify-content-center my-md-5">
     <div class="sub-nav my-5">
-        <button type='button' class="" id="gents_prod">Gents</button>
-        <button type='button' class="" id="ladies_prod">Ladies</button>
+        <button type='button' class="" id="gents_prod">Mens</button>
+        <button type='button' class="" id="ladies_prod">Womens</button>
     </div>
     <div class="" id="cat-gen-alert"></div>
     <div class="row justify-content-center" id="cat-gender-view">
@@ -19,18 +19,19 @@
           </a>
           <div class="product-info">
             <h3 class="product-title">{{product.title|slice:":38"}}</h3>
-            <p class="product-price row align-items-center">${{product.selling_price}}
-              <button class="cart-btn" data-id={{product.id}}>
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </p>              
+                        
             <div class="product-card-rating">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
-              <i class="far fa-star"></i>
+              <i class="fa fa-star"></i>
             </div>
+            <p class="product-price row align-items-center">${{product.selling_price}}
+              <button class="cart-btn" data-id={{product.id}}>
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </p>  
           </div>
         </div>
       {% endfor %}
