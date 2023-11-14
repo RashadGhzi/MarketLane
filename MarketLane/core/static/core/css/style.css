@@ -290,7 +290,6 @@ button[type="submit"] i {
 .carousel-control-prev {
   width: 3%;
 }
-
 .svg-inline--fa {
   height: 0.8em;
 }
@@ -299,6 +298,13 @@ button[type="submit"] i {
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
   background-color: darkslategray;
+  background-color: black;
+  opacity: 1 !important;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: black;
+  opacity: 1;
 }
 
 .carousel-indicators {
@@ -734,7 +740,7 @@ hr {
   width: 100%;
   border-radius: 5px;
   font-weight: bold;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .cart-total-button a:hover {

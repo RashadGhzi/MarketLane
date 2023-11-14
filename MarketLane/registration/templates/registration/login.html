@@ -33,13 +33,13 @@
                         <input class="form-check-input" type="checkbox" name="remember-check" id="remember-check">
                         <label class="ms-2 text-white" for="remember-check">remember me</label>
                     </div>
-                    <a href="{% url 'password_reset' %}" class="forgot-password text-danger fw-semibold ms-3">
+                    <a href="{% url 'password_reset' %}" class="forgot-password text-white fw-semibold ms-3 fw-bold">
                         Forgot Password?
                     </a>
                 </div>
                 <input class="form-submit-btn my-3 fw-bold" type="submit" value="Login">
             </form>
-            <div class="text-white">Don't have an account? <a href="{% url 'user_registration' %}" class="fw-bold text-decoration-none text-info">Register</a></div>           
+            <div class="text-white">Don't have an account? <a href="{% url 'user_registration' %}" class="fw-bold text-decoration-none text-white">Register</a></div>           
         </div>
     </div>
 {% endblock body-content %}
